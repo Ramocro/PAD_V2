@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../partials/head %>
+	<title>Review</title>
+</head>
+<body>
+	<form method="POST">
+		<input id="text" name="text" type="text">
+		<input id="button" name="button" type="submit" name="button">
+	</form>
+	<% var text = "" %>
+	<% if (typeof body !== 'undefined') {%>
+	<% text = body.text %>
+	<% }%>
+	<a><%= text %></a>
+</body>
+</html>
