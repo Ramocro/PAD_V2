@@ -1,3 +1,6 @@
+<% var object = JSON.parse(response) %>
+<% var zoekdata = object.aquabrowser.results.result %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +12,34 @@
 	<div class="columns">
 		<div class="column">
 			<h1>Suggesties</h1>
+			<div class="column">
+				<% zoekdata.forEach(function(result) { %>
+				<div class="box">
+					<a href="/details/<%= result.id.nativeid %>">
+						<article class="media">
+							<div class="media-left">
+								<figure class="image is-2by3">
+									<% var image = result.coverimages.coverimage[result.coverimages.coverimage.length-1].$t %>
+									<img src="<%= image %>" alt="Boek">
+								</figure>
+							</div>
+							<div class="media-content">
+								<div class="content">
+									<p>
+										<strong><%= result.titles['short-title'].$t %></strong><br>
+										<% try{ %>
+										<%= result.authors['main-author'].$t %>
+										<% }catch(e){ %>
+										<%= "Onbekend" %>
+										<% } %>
+									</p>
+								</div>
+							</div>
+						</article>
+					</a>
+				</div>
+				<% }); %>
+			</div>
 		</div>
 		<div class="column">
 			<h1>Populair</h1>
