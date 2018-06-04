@@ -1,0 +1,26 @@
+{
+  "name": "youngreads",
+  "version": "1.0.0",
+  "description": "[![N|Solid](https://melvinvoetberg.nl/icons/trello.png)](https://trello.com/oba39) [![N|Solid](https://melvinvoetberg.nl/icons/blog.png)](https://weblog.youngreads.nl/)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melvinvoetberg/YoungReads.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melvinvoetberg/YoungReads/issues"
+  },
+  "homepage": "https://github.com/melvinvoetberg/YoungReads#readme",
+  "dependencies": {
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
+    "mysql": "^2.15.0",
+    "oba-api": "github:rijkvanzanten/node-oba-api"
+  }
+}
