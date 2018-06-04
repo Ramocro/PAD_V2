@@ -18,7 +18,16 @@ router.use(express.urlencoded());
 // Requests with API
 router.get('/', (req, res) => getTopTen(req, res));
 router.get('/zoeken', (req, res) => search(req, res));
-router.get('/details', (req, res) => getBookDetails(req, res));
+router.get('/details/:id', (req, res) => getBookDetails(req, res));
+router.get('/api', (req, res) => {
+	client.get('search', {
+		q: "a",
+		pagesize: 10,
+		librarian: true,
+	})
+	.then(response => res.json(JSON.parse(response)))
+	.catch(error => res.json(JSON.parse(error)))
+});
 
 // Requests without API
 router.get('/mijnboeken', (req, res) => getMyBooks(req, res));

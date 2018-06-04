@@ -43,7 +43,7 @@
 							<div class="media-content">
 								<div class="content">
 									<p>
-										<strong><%= result.titles['short-title'].$t %></strong><br>
+										<strong><%= result.titles['short-title'].$t %></strong> Rang = <%= /[0-9][.][0-9]{3,5}|[0-9]{1,3}/.exec(result['librarian-info']['info']['debug']) %><br>
 										<% try{ %>
 										<%= result.authors['main-author'].$t %>
 										<% }catch(e){ %>
