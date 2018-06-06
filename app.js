@@ -17,6 +17,7 @@ var mysql = new MySQL(config.mysql);
 mysql.connect(
 	function(err){
 		if (err) throw err;
+		console.log('connected as id ' + mysql.connection.threadId);
 		const router = require('./modules/router.js');
 		router.mysql = mysql;
 	}

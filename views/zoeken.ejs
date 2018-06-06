@@ -19,8 +19,18 @@
 					<hr>
 					<div class="content">
 						<div class="select">
-							<select>
-								<option>Laden...</option>
+							<select id="levelSelector" onchange="refresh()">
+								<option>A</option>
+								<option>AJ</option>
+								<option>AK</option>
+								<option>AP</option>
+								<option>B</option>
+								<option>C</option>
+								<option>E-E3</option>
+								<option>E-E4</option>
+								<option>E-M</option>
+								<option>E-S</option>
+								<option>J</option>
 							</select>
 							<select>
 								<option>Laden...</option>
@@ -32,7 +42,7 @@
 			<div class="column">
 				<% zoekdata.forEach(function(result) { %>
 				<div class="box">
-					<a href="/details/<%= result.id.nativeid %>">
+					<a href="/details?id=<%= result.id.nativeid %>">
 						<article class="media">
 							<div class="media-left">
 								<figure class="image is-2by3">
@@ -43,12 +53,21 @@
 							<div class="media-content">
 								<div class="content">
 									<p>
-										<strong><%= result.titles['short-title'].$t %></strong><br>
+										<strong><%= result.titles['short-title'].$t %></strong>
+										<br>
 										<% try{ %>
 										<%= result.authors['main-author'].$t %>
 										<% }catch(e){ %>
 										<%= "Onbekend" %>
 										<% } %>
+										<br>
+										<a>
+											<% try{ %>
+											<%= result['librarian-info'].record.marc.df059.df059.$t %>
+											<% }catch(e){ %>
+											<%= "Joden" %>
+											<% } %>
+								    </a>
 									</p>
 								</div>
 							</div>
@@ -60,4 +79,11 @@
 		</div>
 	</div>
 </body>
+<script>
+let params = (new URL(document.location)).searchParams;
+var levelSelector = document.getElementById("levelSelector");
+function refresh() {
+	window.location = "zoeken?q=" + params.get("q") + "&level=" + levelSelector.value
+}
+</script>
 </html>
