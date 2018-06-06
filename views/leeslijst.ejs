@@ -1,55 +1,81 @@
-<function saveboektolist(id, err){ "INSERT INTO leeslijst_content (alias, code, boekid) VALUES ('alias', '1', '1139701')";
-    if (err) throw err; console.log( "record inserted"); }>
+<!DOCTYPE html>
+<html>
 
-    <function getboekid(id, err){ con.query( "SELECT boekid FROM leeslijst_content") function(err, result, fields){ if(err) throw
-        err; console.log(result); } }>
+<head>
+    <% include ../partials/head %>
+        <title>Leeslijst</title>
+</head>
 
-        <!DOCTYPE html>
-        <html>
-
-        <head>
-            <% include ../partials/head %>
-                <title>Leeslijst</title>
-        </head>
-
-        <body>
-            <% include ../partials/hero %>
-                <div class="container">
-                    <h1 class="title">Leeslijst</h1>
-                    <div class="columns">
-                        <div class="column is-7">
-                            <div class="box2">
-                                <p class="title">Leeslijst van</p>
-                                <p class="subtitle">Username</p>
-                                <article class="media">
-                                    <div class="media-left">
-                                    </div>
-                                    <div class="media-content">
-                                        <div class="content">
-                                            <p>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </article>
+<body>
+    <% include ../partials/hero %>
+        <div class="container">
+            <h1 class="title">Leeslijst</h1>
+            <div class="columns">
+                <div class="column is-7">
+                    <div class="box2">
+                        <p class="title">Leeslijst van Rayman</p>
+                        <div class="field">
+                            <label class="label">Wat is de naam van je leeslijst?</label>
+                            <div class="control">
+                                <input class="input" name="lijstnaam" type="text" placeholder="leeslijst">
                             </div>
+                            <div class="column">
+                            </div>
+                            <a class="button is-success">
+                                <span class="icon is-small">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span>Maken</span></a>
                         </div>
-                        <div class="column">
-                            <div class="box">
-                                <p class="title">Maak een leeslijst</p>
-                                <p> Ga met deze lijst naar de OBA bij jou in de buurt. Zo kan je makkelijk jouw boeken vinden.
-                                    Kan je het niet vinden? Dan helpen we je daar graag! </p>
-                                <div class="columns is-multiline is-mobile">
-                                    <div class="column is-two-thirds">
-                                        <div class="column is-left"></div>
-                                        <a class="button is-link, is-rounded" title="opslaan" disabled>Opslaan</a>
-                                        <a class="button is-link, is-rounded" title="Printen" disabled>Printen</a>
-                                        <a class="button is-link, is-rounded" title="Lijst wissen" disabled>Lijst wissen</a>
-                                    </div>
+                        <article class="media">
+                            <div class="media-left">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <% leeslijst.forEach(function(result) { %>
+                                        <article class="media">
+                                                <div class="media-left">
+                                                    <figure class="image is-2by3">
+                                                        <% var image = result.coverimages.coverimage[result.coverimages.coverimage.length-1].$t %>
+                                                       <a href="<%= result.customDetailsUrl %>">  <img src="<%= image %>" alt="Boek"> </a>                                                    </figure>
+                                                </div>
+                                                <div class="media-content">
+                                                    <div class="content">
+                                                        <p>
+                                                            <u><a href="<%= result.customDetailsUrl %>"><strong><%= result.titles['short-title'].$t %></strong></a> </u>                                                           <br>
+                                                            <% try{ %>
+                                                            <%= result.authors['main-author'].$t %>
+                                                            <% }catch(e){ %>
+                                                            <%= "Onbekend" %>
+                                                            <% } %>                                                            
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                    <% }); %>
                                 </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="box">
+                        <p class="title">Maak een leeslijst</p>
+                        <p> Ga met deze lijst naar de OBA bij jou in de buurt. Zo kan je makkelijk jouw boeken vinden. Kan je
+                            het niet vinden? Dan helpen we je daar graag! </p>
+                        <div class="columns is-multiline is-mobile">
+                            <div class="column is-two-thirds">
+                                <div class="column is-left"></div>
+                                <a class="button is-link, is-rounded" title="opslaan" disabled>Opslaan</a>
+                                <a class="button is-link, is-rounded" title="Printen" disabled>Printen</a>
+                                <a class="button is-link, is-rounded" title="Lijst wissen" disabled>Lijst wissen</a>
                             </div>
                         </div>
                     </div>
                 </div>
-        </body>
+            </div>
+        </div>
+</body>
 
-        </html>
+</html>
