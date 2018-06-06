@@ -13,11 +13,21 @@ router.set('view engine', 'ejs');
 router.use(express.static(config.publicDir));
 router.use(express.urlencoded());
 
-router.get('/', (req, res) => res.render('index'));
+
 
 // Requests with API
+router.get('/', (req, res) => getTopTen(req, res));
 router.get('/zoeken', (req, res) => search(req, res));
-router.get('/details', (req, res) => getBookDetails(req, res));
+router.get('/details/:id', (req, res) => getBookDetails(req, res));
+router.get('/api', (req, res) => {
+	client.get('search', {
+		q: "a",
+		pagesize: 10,
+		librarian: true,
+	})
+	.then(response => res.json(JSON.parse(response)))
+	.catch(error => res.json(JSON.parse(error)))
+});
 
 // Requests without API
 router.get('/mijnboeken', (req, res) => getMyBooks(req, res));
@@ -25,6 +35,20 @@ router.get('/mijnboeken', (req, res) => getMyBooks(req, res));
 router.get('/leeslijst', (req, res) => getLeeslijst(req, res));
 
 router.listen(config.server.port, () => console.log("Server started on port " + config.server.port));
+
+function getTopTen(req, res) {
+	client.get('search', {
+		q: "q",
+		pagesize: 3,
+		librarian: true,
+	})
+	.then(response => res.render('index', {
+		response: response
+	}))
+	.catch(error => res.render('index', {
+		response: error
+	}))
+}
 
 function search(req, res) {
 
